@@ -4,6 +4,8 @@ import pygame
 from settings import WINDOW_WIDTH, WINDOW_HEIGHT, WHITE, KEY
 from keys import create_keys, draw_keys
 from sounds import load_sound
+'''Додай імопрт класу меню'''
+
 # 7. Ініцилізація та Створити вікно 
 pygame.init()
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -14,11 +16,17 @@ key_pressed = set()
 # 10. Створити список звуків - завантажити звуки нот
 sounds = load_sound()
 
+'''Створи обєкт меню:
+координати - 20,20,
+розмір - 100, 40
+кольри - GREY, WHITE, BLUE'''
+
 # 11. Головний цикл гри:
 run = True
 while run:
 # - обробка закртиття вікна
    for event in pygame.event.get():
+      '''виклич метод оновлення меню - передай подію event'''
       if event.type == pygame.QUIT:
          run = False
 #  - обробка подій (натискання та відпускання клавіш)
@@ -44,6 +52,12 @@ while run:
     
 #  - відобразити фон, клавіши, оновити вікно
    window.fill(WHITE)
+   '''виклич метод малювати меню'''
+
+   '''перепиши список клавіш :
+   виклич метод їх стоврення передавши значення кільксоті клавіш з меню'''
+
+   '''додай умову - малювати якщо стангри=гра(перевір значення властивості меню)'''
    draw_keys(window,keys,key_pressed)
    pygame.display.flip()
     # обробка лкіку по клавішам
