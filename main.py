@@ -5,6 +5,7 @@ from settings import WINDOW_WIDTH, WINDOW_HEIGHT, WHITE, KEY
 from keys import create_keys, draw_keys
 from sounds import load_sound
 '''Додай імопрт класу меню'''
+from ui.settingsUi import SettingsMenu
 
 # 7. Ініцилізація та Створити вікно 
 pygame.init()
@@ -20,13 +21,14 @@ sounds = load_sound()
 координати - 20,20,
 розмір - 100, 40
 кольри - GREY, WHITE, BLUE'''
-
+settings_menu = SettingsMenu(20,20,100,40,GRAY,WHITE,BLUE)
 # 11. Головний цикл гри:
 run = True
 while run:
 # - обробка закртиття вікна
    for event in pygame.event.get():
       '''виклич метод оновлення меню - передай подію event'''
+      settings_menu.update(event)
       if event.type == pygame.QUIT:
          run = False
 #  - обробка подій (натискання та відпускання клавіш)
@@ -53,12 +55,13 @@ while run:
 #  - відобразити фон, клавіши, оновити вікно
    window.fill(WHITE)
    '''виклич метод малювати меню'''
-
+   settings_menu.draw(window)
    '''перепиши список клавіш :
    виклич метод їх стоврення передавши значення кільксоті клавіш з меню'''
-
+   
    '''додай умову - малювати якщо стангри=гра(перевір значення властивості меню)'''
-   draw_keys(window,keys,key_pressed)
+   if settings_menu.game_part == "game": 
+      draw_keys(window,keys,key_pressed)
    pygame.display.flip()
     # обробка лкіку по клавішам
 
