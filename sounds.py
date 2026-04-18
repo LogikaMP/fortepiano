@@ -1,11 +1,14 @@
 '''Звуки – завантаження та відтворення аудіо'''
-from pygame import mixer
-from settings import KEY
+from pygame.mixer import Sound
+from settings import KEYS
 
-# 5. Створити функцію що завантажує звуки:
-def load_sound():
+def load_sounds():
     sounds = {}
     path_file = "assets/sounds/"
-    for key, sound in KEY.items():
-        sounds [key] = mixer.Sound(path_file + sound)
+    for key,file in KEYS.items():
+        sound = Sound(path_file + file)
+        sounds[key] = sound
     return sounds
+
+# 5. Створити функцію що завантажує звуки:
+

@@ -1,26 +1,30 @@
 '''Клавіші – логіка створення та відображення'''
-from settings import KEY, X_START, Y_START, KEY_WIDTH, KEY_HEIGHT
 from pygame import Rect
+from settings import KEYS, KEY_WIDTH, KEY_HEIGHT, X_KEY_START, Y_KEY_START
 from effects import draw_effect
+
+
+def create_keys():
+    keys = {}
+    x = X_KEY_START
+    for key in KEYS:
+        r = Rect(x, Y_KEY_START, KEY_WIDTH, KEY_HEIGHT)
+        keys[key] = r
+        x += KEY_WIDTH + 10
+    return keys
+
+def draw_keys(screen, keys, is_pressed):
+    for key,rect in keys.items():
+        pressed = key in is_pressed
+        draw_effect(screen, rect, pressed)
+
 # 2. Створити функцію, що створює список ректів - клавіш:
 #  - використати глобальні змінні - кількість лкавіш, ромзір та координати для старту клавіш
 # повернути список ректів клавіш
 
-'''1 - додай аргумент - кількість клавши та зміни функцію:
-перепиши цикл від 0 до кільксоті клавіш'''
-def create_keys():
-    keys = {}
-    x = X_START
-    for key in KEY:
-        rect = Rect(x,Y_START,KEY_WIDTH,KEY_HEIGHT)
-        keys [key] = rect
-        x += KEY_WIDTH + 10
-    return keys
+
 # 3. Створити функцію, що відображає клавіші на екрані:
 #  - отримати екран, де малювати
 # -  отримати список ректів, що потрібно малювати
 #  - отримати список  натиснутих клавіш 
-def draw_keys(window,keys,keys_pressed):
-    for key, rect in keys.items():
-        is_pressed = key in keys_pressed
-        draw_effect(window,rect,is_pressed)
+
