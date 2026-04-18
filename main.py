@@ -1,7 +1,7 @@
 '''Main – запуск гри та обробка подій'''
 # 6. Імпортуємо все що необхідно для роботи гри
 import pygame
-from settings import WINDOW_WIDTH, WINDOW_HEIGHT, WHITE, KEY, GRAY, BLUE
+from settings import GRAY, WINDOW_WIDTH, WINDOW_HEIGHT, WHITE,GRAY,BLUE ,KEY
 from keys import create_keys, draw_keys
 from sounds import load_sound
 '''Додай імопрт класу меню'''
@@ -24,6 +24,7 @@ setting = SettingsMenu(20,20,100,40,GRAY,WHITE,BLUE)
 # 11. Головний цикл гри:
 run = True
 while run:
+   setting.update()
 # - обробка закртиття вікна
    for event in pygame.event.get():
       '''виклич метод оновлення меню - передай подію event'''
@@ -31,7 +32,7 @@ while run:
       if event.type == pygame.QUIT:
          run = False
 #  - обробка подій (натискання та відпускання клавіш)
-      if event.type == pygame.KEYDOWN:
+      if event.type == pygame.KEYDOWN and setting.game_part=="game":
          key_name = pygame.key.name(event.key)
          sounds [key_name].play()
          key_pressed.add(key_name)
@@ -39,22 +40,22 @@ while run:
          key_name = pygame.key.name(event.key)
          key_pressed.discard(key_name)  
 #  - обробка кліку по клавішам  
-      if event.type == pygame.MOUSEBUTTONDOWN:
+      if event.type == pygame.MOUSEBUTTONDOWN and setting.game_part=="game":
          pos = event.pos
          for key, rect in keys.items():
             if rect.collidepoint(pos) and not key in key_pressed:
-               sounds [key_name].play()
+               sounds[key].play()
                key_pressed.add(key)
       if event.type == pygame.MOUSEBUTTONUP:
          pos = event.pos
          for key,rect in keys.items():
             if rect.collidepoint(pos) and key in key_pressed:
-               key_pressed.discard(key_name)
+               key_pressed.discard(key)
     
 #  - відобразити фон, клавіши, оновити вікно
    window.fill(WHITE)
    '''виклич метод малювати меню'''
-   setting.draw(window)
+   setting.darw(window)
    '''перепиши список клавіш :
    виклич метод їх стоврення передавши значення кільксоті клавіш з меню'''
 

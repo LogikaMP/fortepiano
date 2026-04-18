@@ -9,27 +9,29 @@ from settings import KEY
 # координати для кнокпи налаштування та розміри
 # кольри: кнопки, тексту, слайдера
 class SettingsMenu:                 
-    def __init__(self,x,y,w,h,color_btn,color_txt,color_slider): 
+    def __init__(self,x,y,w,h,col_btn,col_txt,col_slider): 
         # створи кнопку відкриття меню налаштувань: 
+
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Setting" , 
         # команда - відкрити меню
-        self.btn_open = Button(x,y,w,h,color_btn,"Setting",color_txt,command=self.open_menu)
+        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu)
         # створи кнопку повернення назад
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Back" , 
         # команда - закрити меню
-        self.btn_close = Button(x,y,w,h,color_btn,"Back",color_txt,command=self.close_menu)
+        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu)
         # змісти координати для розміщення елементів меню - тексти+слайдери, 
         # х = ч + половина висоти, у = у + ширина
-        
+    
+
         # створи текстову кнопку (підпис) для гучності: 
         # координати - що розрахували вище, 
         # текст = "Volume", команди = немає
         
         # обчисли позицію для повзунка (праворуч від тексту), 
         # х2 = права координата текстової кнокпи + половина висоти
-
+        
         # трохи змісти вниз для кращого вирівнювання : у = у + чверть висоти
 
         # створи повзунок гучності : 
@@ -37,7 +39,7 @@ class SettingsMenu:
         # ширина = три ширина, 
         # висота = половина висоти
         # (від 0 до 101)
-         
+       
         # створи змінну для збереження гучності = 0
 
         # змісти вниз для наступного блоку= у + дві вистоти
@@ -61,7 +63,7 @@ class SettingsMenu:
 
     def open_menu(self):
         # переключи стан на меню налаштувань
-        self.game_part = "setting"
+        self.game_part = "settings"
     def close_menu(self): 
         # поверни стан назад до гри
         self.game_part = "game"
@@ -73,11 +75,11 @@ class SettingsMenu:
             # намалюй кнопку налаштувань
             self.btn_open.draw(window)
         # якщо стан гри = налащтування
-        if self.game_part == "setting":
+        if self.game_part == "settings":
             # намалюй кнопку назад
             self.btn_close.draw(window)
             # намалюй текст гучності
-
+          
             # намалюй повзунок гучності
 
             # намалюй текст кількості клавіш
@@ -86,17 +88,18 @@ class SettingsMenu:
 
            
     #метод оновлення меню
-    def update(self, event):
+    def update(self, event=None):
         # якщо стан гри = гра
-        if self.game_part == "game":
+         if self.game_part == "game" :   
             # перевір натискання кнопки налаштувань
             self.btn_open.is_clicked()
         # якщо стан гри = налащтування
-        if self.game_part == "setting":
+         if self.game_part == "settings":
+        
             # перевір натискання кнопки назад
             self.btn_close.is_clicked()
             # оброби перетягування повзунка гучності
- 
+          
             # оброби перетягування повзунка клавіш
 
             # 0 - 1 (нормалізація гучності) : значення сладйера гучності  / 100  
