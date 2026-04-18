@@ -10,11 +10,11 @@ from ui.settingsUi import SettingsMenu
 pygame.init()
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 # 8. Створити список ректів - клавіш
-keys = create_keys()
+keys_rect = create_keys()
 # 9. Створити порожню множину - натиснуті клавіши
-key_pressed = set()
+keys_pressed = set()
 # 10. Створити список звуків - завантажити звуки нот
-sounds = load_sound()
+keys_sounds = load_sound()
 
 '''Створи обєкт меню:
 координати - 20,20,
@@ -34,23 +34,23 @@ while run:
 #  - обробка подій (натискання та відпускання клавіш)
       if event.type == pygame.KEYDOWN and setting.game_part=="game":
          key_name = pygame.key.name(event.key)
-         sounds [key_name].play()
-         key_pressed.add(key_name)
+         keys_sounds [key_name].play()
+         keys_pressed.add(key_name)
       if event.type == pygame.KEYUP:
          key_name = pygame.key.name(event.key)
-         key_pressed.discard(key_name)  
+         keys_pressed.discard(key_name)  
 #  - обробка кліку по клавішам  
       if event.type == pygame.MOUSEBUTTONDOWN and setting.game_part=="game":
          pos = event.pos
-         for key, rect in keys.items():
-            if rect.collidepoint(pos) and not key in key_pressed:
-               sounds[key].play()
-               key_pressed.add(key)
+         for key, rect in keys_rect.items():
+            if rect.collidepoint(pos) and not key in keys_pressed:
+               keys_sounds[key].play()
+               keys_pressed.add(key)
       if event.type == pygame.MOUSEBUTTONUP:
          pos = event.pos
-         for key,rect in keys.items():
-            if rect.collidepoint(pos) and key in key_pressed:
-               key_pressed.discard(key)
+         for key,rect in keys_rect.items():
+            if rect.collidepoint(pos) and key in keys_pressed:
+               keys_pressed.discard(key)
     
 #  - відобразити фон, клавіши, оновити вікно
    window.fill(WHITE)
@@ -61,7 +61,7 @@ while run:
 
    '''додай умову - малювати якщо стангри=гра(перевір значення властивості меню)'''
    if setting.game_part == "game":
-      draw_keys(window,keys,key_pressed)
+      draw_keys(window,keys_rect,keys_pressed)
    pygame.display.flip()
     # обробка лкіку по клавішам
 
