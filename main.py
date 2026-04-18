@@ -24,6 +24,7 @@ setting = SettingsMenu(20,20,100,40,GRAY,WHITE,BLUE)
 # 11. Головний цикл гри:
 run = True
 while run:
+   setting.update()
 # - обробка закртиття вікна
    for event in pygame.event.get():
       '''виклич метод оновлення меню - передай подію event'''
@@ -31,7 +32,7 @@ while run:
       if event.type == pygame.QUIT:
          run = False
 #  - обробка подій (натискання та відпускання клавіш)
-      if event.type == pygame.KEYDOWN:
+      if event.type == pygame.KEYDOWN and setting.game_part=="game":
          key_name = pygame.key.name(event.key)
          sounds [key_name].play()
          key_pressed.add(key_name)
@@ -39,7 +40,7 @@ while run:
          key_name = pygame.key.name(event.key)
          key_pressed.discard(key_name)  
 #  - обробка кліку по клавішам  
-      if event.type == pygame.MOUSEBUTTONDOWN:
+      if event.type == pygame.MOUSEBUTTONDOWN and setting.game_part=="game":
          pos = event.pos
          for key, rect in keys.items():
             if rect.collidepoint(pos) and not key in key_pressed:
