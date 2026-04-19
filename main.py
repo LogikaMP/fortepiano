@@ -30,7 +30,7 @@ while run:
    for event in pygame.event.get():
       '''виклич метод оновлення меню - передай подію event'''
       setting.update(event)
-      if len (keys_rect)!=setting.num_keys:
+      if len (keys_rect) != setting.num_keys:
          keys_rect = create_keys(setting.num_keys)
       if event.type == pygame.QUIT:
          run = False
@@ -38,7 +38,7 @@ while run:
       if event.type == pygame.KEYDOWN and setting.game_part=="game":
          key_name = pygame.key.name(event.key)
          if key_name in keys_rect:
-            keys_sounds [key_name].set_volume(setting.volume)
+            keys_sounds[key_name].set_volume(setting.volume)
             keys_sounds [key_name].play()
             keys_pressed.add(key_name)
       if event.type == pygame.KEYUP:
@@ -49,7 +49,7 @@ while run:
          pos = event.pos
          for key, rect in keys_rect.items():
             if rect.collidepoint(pos) and not key in keys_pressed:
-               keys_sounds [key].set_volume(setting.volume)
+               keys_sounds[key].set_volume(setting.volume)
                keys_sounds[key].play()
                keys_pressed.add(key)
       if event.type == pygame.MOUSEBUTTONUP:

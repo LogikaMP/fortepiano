@@ -7,7 +7,7 @@ from effects import draw_effect
 def create_keys(num_keys):
     keys = {}
     x = X_KEY_START
-    data = dict(list(KEYS.items())[:num_keys])
+    data = dict(list(KEYS.items())[:num_keys + 1])
     for key in data:
         r = Rect(x, Y_KEY_START, KEY_WIDTH, KEY_HEIGHT)
         keys[key] = r
