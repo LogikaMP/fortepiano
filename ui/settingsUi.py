@@ -15,12 +15,12 @@ class SettingsMenu:
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Setting" , 
         # команда - відкрити меню
-        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu)
+        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu,image="assets/image/buttons/settings_hover.png")
         # створи кнопку повернення назад
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Back" , 
         # команда - закрити меню
-        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu)
+        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu,image="assets/image/buttons/exit_hover.png")
         # змісти координати для розміщення елементів меню - тексти+слайдери, 
         # х = ч + половина висоти, у = у + ширина
         x = x + h//2
