@@ -13,14 +13,14 @@ class SettingsMenu:
         # створи кнопку відкриття меню налаштувань: 
 
         # координати, розмір, кольри - з конструктора класу, 
-        # теккст -"Setting" , 
-        # оманда - відкрити меню
-        
+        # текст -"Setting" , 
+        # команда - відкрити меню
+        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu)
         # створи кнопку повернення назад
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Back" , 
         # команда - закрити меню
-     
+        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu)
         # змісти координати для розміщення елементів меню - тексти+слайдери, 
         # х = ч + половина висоти, у = у + ширина
     
@@ -59,25 +59,25 @@ class SettingsMenu:
         # створи змінну для збереження кількості клавіш = 0
   
         # задай початковий стан (гра)= властивість game_part = "game"
-        
+        self.game_part = "game"
 
     def open_menu(self):
         # переключи стан на меню налаштувань
-        
+        self.game_part = "settings"
     def close_menu(self): 
         # поверни стан назад до гри
-        
+        self.game_part = "game"
 
     # метод відображення кнопок  та сладйерів меню
     def darw(self, window):
         # якщо стан гри = гра
-        
+        if self.game_part == "game":
             # намалюй кнопку налаштувань
-            
+            self.btn_open.draw(window)
         # якщо стан гри = налащтування
-        
+        if self.game_part == "settings":
             # намалюй кнопку назад
-            
+            self.btn_close.draw(window)
             # намалюй текст гучності
           
             # намалюй повзунок гучності
@@ -90,14 +90,14 @@ class SettingsMenu:
     #метод оновлення меню
     def update(self, event=None):
         # якщо стан гри = гра
-          
+         if self.game_part == "game" :   
             # перевір натискання кнопки налаштувань
-            
+            self.btn_open.is_clicked()
         # якщо стан гри = налащтування
-       
+         if self.game_part == "settings":
         
             # перевір натискання кнопки назад
-           
+            self.btn_close.is_clicked()
             # оброби перетягування повзунка гучності
           
             # оброби перетягування повзунка клавіш
