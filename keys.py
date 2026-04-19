@@ -4,10 +4,11 @@ from settings import KEYS, KEY_WIDTH, KEY_HEIGHT, X_KEY_START, Y_KEY_START
 from effects import draw_effect
 
 
-def create_keys():
+def create_keys(num_keys):
     keys = {}
     x = X_KEY_START
-    for key in KEYS:
+    data = dict(list(KEYS.items())[:num_keys + 1])
+    for key in data:
         r = Rect(x, Y_KEY_START, KEY_WIDTH, KEY_HEIGHT)
         keys[key] = r
         x += KEY_WIDTH + 10

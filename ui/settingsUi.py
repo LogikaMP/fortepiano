@@ -4,7 +4,7 @@
 # імпортуй список клавіш
 from buttons import Button
 from ui.slider import Slider
-from settings import KEY
+from settings import KEYS, BLACK
 # клас меню налаштувань. Аргументи:
 # координати для кнокпи налаштування та розміри
 # кольри: кнопки, тексту, слайдера
@@ -23,39 +23,43 @@ class SettingsMenu:
         self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu)
         # змісти координати для розміщення елементів меню - тексти+слайдери, 
         # х = ч + половина висоти, у = у + ширина
-    
+        x = x + (h//2)
+        y = y + w
 
         # створи текстову кнопку (підпис) для гучності: 
         # координати - що розрахували вище, 
         # текст = "Volume", команди = немає
-        
+        self.btn_txt_vol = Button(x,y,w,h, color=BLACK, command=None, text="Volume", color_text=col_btn) 
         # обчисли позицію для повзунка (праворуч від тексту), 
         # х2 = права координата текстової кнокпи + половина висоти
-        
+        x2 = self.btn_txt_vol.rect.right + (h//2)
         # трохи змісти вниз для кращого вирівнювання : у = у + чверть висоти
-
+        y = y + (h//4)
         # створи повзунок гучності : 
         # координати - ті що розрахували вище, 
         # ширина = три ширина, 
         # висота = половина висоти
         # (від 0 до 101)
-       
+        self.slider_vol = Slider(x2, y, w*3, h//2, 100,
+                                  col=col_slider, col_pointer=col_btn) 
         # створи змінну для збереження гучності = 0
-
+        self.volume = 0
         # змісти вниз для наступного блоку= у + дві вистоти
- 
+        y = y + h*2
         # створи текст для кількості клавіш: 
         # координати - що розрахували вище, 
         # текст = "Num keys", команди = немає
- 
+        self.txt_keys = Button(x, y, w, h, col_btn, "Num Keys", command=None, color_text=BLACK)
         # трохи змісти вниз : у = у + чверть висоти
-  
+        y = y + h//4
         # створи повзунок кількості клавіш
+        self.slder_numkeys = Slider(x2, y, w*3, h//2, 7,
+                                     col=col_slider, col_pointer=col_btn)
         # координати - ті що розрахували вище(х2, у), 
         # ширина = три ширина, 
         # висота = половина висоти
         # (від 0 до кількості клавіш KEYS+1)
-
+        self.num_keys = 0
         # створи змінну для збереження кількості клавіш = 0
   
         # задай початковий стан (гра)= властивість game_part = "game"
@@ -79,13 +83,13 @@ class SettingsMenu:
             # намалюй кнопку назад
             self.btn_close.draw(window)
             # намалюй текст гучності
-          
+            self.btn_txt_vol.draw(window)
             # намалюй повзунок гучності
-
+            self.slider_vol.draw(window)
             # намалюй текст кількості клавіш
-
+            self.txt_keys.draw(window)
             # намалюй повзунок кількості клавіш
-
+            self.slder_numkeys.draw(window)
            
     #метод оновлення меню
     def update(self, event=None):
@@ -99,9 +103,11 @@ class SettingsMenu:
             # перевір натискання кнопки назад
             self.btn_close.is_clicked()
             # оброби перетягування повзунка гучності
-          
+            if event:
+                self.slider_vol.update(event) 
             # оброби перетягування повзунка клавіш
-
+                self.slder_numkeys.update(event)
             # 0 - 1 (нормалізація гучності) : значення сладйера гучності  / 100  
-
+                self.volume = self.slider_vol.value / 100
             # збережи вибрану кількість клавіш
+                self.num_keys = self.slder_numkeys.value
