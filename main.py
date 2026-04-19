@@ -11,11 +11,19 @@ pygame.init()
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 setting = SettingsMenu(20,20,100,40,GRAY,WHITE,BLUE)
 # 8. Створити список ректів - клавіш
+<<<<<<< HEAD
 keys_rect = create_keys(setting.num_keys)
+=======
+keys = create_keys()
+>>>>>>> parent of 24aa5a1 (check name)
 # 9. Створити порожню множину - натиснуті клавіши
-keys_pressed = set()
+key_pressed = set()
 # 10. Створити список звуків - завантажити звуки нот
+<<<<<<< HEAD
 keys_sounds = load_sounds()
+=======
+sounds = load_sound()
+>>>>>>> parent of 24aa5a1 (check name)
 
 '''Створи обєкт меню:
 координати - 20,20,
@@ -37,26 +45,38 @@ while run:
 #  - обробка подій (натискання та відпускання клавіш)
       if event.type == pygame.KEYDOWN and setting.game_part=="game":
          key_name = pygame.key.name(event.key)
+<<<<<<< HEAD
          if key_name in keys_rect:
             keys_sounds[key_name].set_volume(setting.volume)
             keys_sounds[key_name].play()
             keys_pressed.add(key_name)
+=======
+         sounds [key_name].play()
+         key_pressed.add(key_name)
+>>>>>>> parent of 24aa5a1 (check name)
       if event.type == pygame.KEYUP:
          key_name = pygame.key.name(event.key)
-         keys_pressed.discard(key_name)  
+         key_pressed.discard(key_name)  
 #  - обробка кліку по клавішам  
       if event.type == pygame.MOUSEBUTTONDOWN and setting.game_part=="game":
          pos = event.pos
+<<<<<<< HEAD
          for key, rect in keys_rect.items():
             if rect.collidepoint(pos) and not key in keys_pressed:
                keys_sounds[key].set_volume(setting.volume)
                keys_sounds[key].play()
                keys_pressed.add(key)
+=======
+         for key, rect in keys.items():
+            if rect.collidepoint(pos) and not key in key_pressed:
+               sounds[key].play()
+               key_pressed.add(key)
+>>>>>>> parent of 24aa5a1 (check name)
       if event.type == pygame.MOUSEBUTTONUP:
          pos = event.pos
-         for key,rect in keys_rect.items():
-            if rect.collidepoint(pos) and key in keys_pressed:
-               keys_pressed.discard(key)
+         for key,rect in keys.items():
+            if rect.collidepoint(pos) and key in key_pressed:
+               key_pressed.discard(key)
     
 #  - відобразити фон, клавіши, оновити вікно
    window.fill(WHITE)
@@ -67,7 +87,7 @@ while run:
 
    '''додай умову - малювати якщо стангри=гра(перевір значення властивості меню)'''
    if setting.game_part == "game":
-      draw_keys(window,keys_rect,keys_pressed)
+      draw_keys(window,keys,key_pressed)
    pygame.display.flip()
     # обробка лкіку по клавішам
 
