@@ -31,7 +31,7 @@ class Sprite:
 
 class Button(Sprite):  # Створюємо клас кнопки, який наслідує властивості класу Sprite
      
-     def __init__(self, x, y, w, h, color, text, color_text, command):
+     def __init__(self, x, y, w, h, color, text, color_text, image=None, command=None):
           # Конструктор класу. Виконується при створенні об'єкта кнопки
 
           # Викликаємо конструктор батьківського класу Sprite і передаємо координати, розміри та колір
@@ -40,7 +40,11 @@ class Button(Sprite):  # Створюємо клас кнопки, який на
           # Зберігаємо колір тексту кнопки
           self.command = command
           # Зберігаємо функцію, яка виконається при натисканні кнопки
-          self.add_text(text)
+          if image:
+               self.image = pygame.image.load(image)
+               self.image = pygame.transform.scale(self.image, (w,h))
+          else:
+               self.add_text(text)
           # Викликаємо метод створення тексту на кнопці
           self.was_pressed = False
           # Прапорець, що показує чи була кнопка натиснута раніше
@@ -67,12 +71,12 @@ class Button(Sprite):  # Створюємо клас кнопки, який на
 
 
      def draw(self, surface):  
-          # Метод відмалювання кнопки на екрані
-          super().draw(surface)
-          pygame.draw.rect(surface,(0,0,0),self.rect,width=5)
-          # Малюємо саму кнопку через метод батьківського класу
-          surface.blit(self.text, (self.text_x, self.text_y))
-          # Малюємо текст поверх кнопки
+          if self.image:
+               surface.blit(self.image, self.rect)
+          else:
+               super().draw(surface)
+               pygame.draw.rect(surface,(0,0,0),self.rect,width=5)
+               surface.blit(self.text, (self.text_x, self.text_y))
           
      def is_clicked(self):  
           # Метод перевіряє чи натиснута кнопка
