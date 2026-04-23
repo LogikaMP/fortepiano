@@ -9,13 +9,13 @@ from settings import BLACK
 class Slider:                        
     def __init__(self,x,y,w,h,max_num,col,col_pointer):
         # зберіхи у властивість максимальне значення повзунка
-        self.max_num = max_num
+        self.max_num = max_num+1
         # створи прямокутник основи повзунка - координати та розмір із конструктора
         self.slider = pygame.Rect(x,y,w,h)
         # створи повзунок (кнопкуб поінтер): 
         # х такий самийб у - половина висоти слайдера 
         # вистоа, ширина(квадрат) - висота слайдера*2
-        self.pointer = pygame.Rect(x,y-h,h*3,h*3)
+        self.pointer = pygame.Rect(x,y-h//2,h*2,h*2)
 
         # встанови початкову позицію центра повзунка по X 
         self.pointer.centerx = x
@@ -34,7 +34,7 @@ class Slider:
         # запам’ятай кінець повзунка: х + ширина слайдера
         self.end = w +x
         # створи шрифт для відображення значення розмір шрифта=вистоа слайдера
-        self.font = pygame.font.Font(None,h*2)
+        self.font = pygame.font.Font(None,h)
         # одразу виклич метод для оновлення даних тексту сладйера, його значення
         self.update_value()
 
