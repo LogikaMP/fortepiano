@@ -15,12 +15,12 @@ class SettingsMenu:
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Setting" , 
         # команда - відкрити меню
-        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu,image="assets/image/buttons/settings_hover.png")
+        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu,image="assets/data/images/buttons/settings_hover.png")
         # створи кнопку повернення назад
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Back" , 
         # команда - закрити меню
-        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu,image="assets/image/buttons/exit_hover.png")
+        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu,image="assets/data/images/buttons/exit_hover.png")
         # змісти координати для розміщення елементів меню - тексти+слайдери, 
         # х = ч + половина висоти, у = у + ширина
         x = x + h//2
@@ -34,7 +34,7 @@ class SettingsMenu:
         
         # обчисли позицію для повзунка (праворуч від тексту), 
         # х2 = права координата текстової кнокпи + половина висоти
-        x2 = self.txt_volume.rect.right + h//2
+        x2 = self.txt_volume.rect.right + h//1.5
         
         # трохи змісти вниз для кращого вирівнювання : у = у + чверть висоти
         y = y + h//4
@@ -64,7 +64,7 @@ class SettingsMenu:
         # ширина = три ширина, 
         # висота = половина висоти
         # (від 0 до кількості клавіш KEYS+1)
-        self.slider_num_keys = Slider(x2,y,w*3,h//2,max_num=7,col=col_slider,col_pointer=col_btn)
+        self.slider_num_keys = Slider(x2,y+h//3,w*3,h//2,max_num=7,col=col_slider,col_pointer=col_btn)
         self.num_keys = 0
         # створи змінну для збереження кількості клавіш = 0
   

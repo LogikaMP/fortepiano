@@ -1,7 +1,7 @@
 '''Main – запуск гри та обробка подій'''
 # 6. Імпортуємо все що необхідно для роботи гри
 import pygame
-from settings import GRAY, WINDOW_WIDTH, WINDOW_HEIGHT, WHITE,GRAY,BLUE ,KEYS
+from settings import GRAY, WINDOW_WIDTH, WINDOW_HEIGHT, WHITE,GRAY,BLUE ,KEYS, FON
 from keys import create_keys, draw_keys
 from sounds import load_sounds
 '''Додай імопрт класу меню'''
@@ -59,7 +59,7 @@ while run:
                keys_pressed.discard(key)
     
 #  - відобразити фон, клавіши, оновити вікно
-   window.fill(WHITE)
+   window.fill(FON)
    '''виклич метод малювати меню'''
    setting.darw(window)
    '''перепиши список клавіш :
