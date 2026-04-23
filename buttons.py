@@ -31,11 +31,7 @@ class Sprite:
 
 class Button(Sprite):  # Створюємо клас кнопки, який наслідує властивості класу Sprite
      
-<<<<<<< HEAD
-     def __init__(self, x, y, w, h, color, text, color_text, command, image = None):
-=======
      def __init__(self, x, y, w, h, color, text, color_text, command,image = None):
->>>>>>> Savelii
           # Конструктор класу. Виконується при створенні об'єкта кнопки
 
           # Викликаємо конструктор батьківського класу Sprite і передаємо координати, розміри та колір
@@ -49,11 +45,7 @@ class Button(Sprite):  # Створюємо клас кнопки, який на
                self.image = pygame.transform.scale(self.image,(w,h))
           else:
                self.add_text(text)
-<<<<<<< HEAD
-          # Викликаємо метод створення тексту на кнопці
-=======
                # Викликаємо метод створення тексту на кнопці
->>>>>>> Savelii
           self.was_pressed = False
           # Прапорець, що показує чи була кнопка натиснута раніше
 
@@ -78,18 +70,6 @@ class Button(Sprite):  # Створюємо клас кнопки, який на
           # Обчислюємо координату Y для центрування тексту по вертикалі
 
 
-<<<<<<< HEAD
-     def draw(self, surface): 
-          if self.image:
-               surface.blit(self.image,self.rect) 
-          # Метод відмалювання кнопки на екрані
-          else:
-               super().draw(surface)
-               pygame.draw.rect(surface,(0,0,0),self.rect,width=5)
-          # Малюємо саму кнопку через метод батьківського класу
-               surface.blit(self.text, (self.text_x, self.text_y))
-          # Малюємо текст поверх кнопки
-=======
      def draw(self, surface):
           if self.image:
                surface.blit(self.image,self.rect)
@@ -100,7 +80,6 @@ class Button(Sprite):  # Створюємо клас кнопки, який на
                # Малюємо саму кнопку через метод батьківського класу
                surface.blit(self.text, (self.text_x, self.text_y))
                # Малюємо текст поверх кнопки
->>>>>>> Savelii
           
      def is_clicked(self):  
           # Метод перевіряє чи натиснута кнопка

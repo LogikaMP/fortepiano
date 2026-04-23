@@ -15,20 +15,12 @@ class SettingsMenu:
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Setting" , 
         # команда - відкрити меню
-<<<<<<< HEAD
-        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu,image="assets/image/buttons/settings_hover.png")
-=======
-        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu,image="assets/data/images/buttons/settings_hover.png")
->>>>>>> Savelii
+        self.btn_open = Button(x,y,w,h,col_btn,"Settings",col_txt,command= self.open_menu,image="assets/images/buttons/settings_hover.png")
         # створи кнопку повернення назад
         # координати, розмір, кольри - з конструктора класу, 
         # текст -"Back" , 
         # команда - закрити меню
-<<<<<<< HEAD
-        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu,image="assets/image/buttons/exit_hover.png")
-=======
-        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu,image="assets/data/images/buttons/exit_hover.png")
->>>>>>> Savelii
+        self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu,image="assets/images/buttons/exit_hover.png")
         # змісти координати для розміщення елементів меню - тексти+слайдери, 
         # х = ч + половина висоти, у = у + ширина
         x = x + h//2
