@@ -1,26 +1,29 @@
 '''Main – запуск гри та обробка подій'''
 # 6. Імпортуємо все що необхідно для роботи гри
 import pygame
-from settings import GRAY, WINDOW_WIDTH, WINDOW_HEIGHT, WHITE,GRAY,BLUE ,KEY
-from keys import create_keys, draw_keys
-from sounds import load_sound
+from settings import GRAY, WINDOW_WIDTH, WINDOW_HEIGHT, WHITE,GRAY,BLUE ,KEYS, FON
+from keys import create_keys, draw_keys,load_sounds_img
+from effects import draw_effect_sound
+from sounds import load_sounds, load_rand_sounds
 '''Додай імопрт класу меню'''
 from ui.settingsUi import SettingsMenu
 # 7. Ініцилізація та Створити вікно 
 pygame.init()
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+setting = SettingsMenu(20,20,100,40,GRAY,WHITE,BLUE)
 # 8. Створити список ректів - клавіш
-keys_rect = create_keys()
+keys_rect = create_keys(setting.num_keys)
+sounds_img = load_sounds_img()
 # 9. Створити порожню множину - натиснуті клавіши
 keys_pressed = set()
 # 10. Створити список звуків - завантажити звуки нот
-keys_sounds = load_sound()
-
+keys_sounds = load_sounds()
+rand_sounds = load_rand_sounds()
 '''Створи обєкт меню:
 координати - 20,20,
 розмір - 100, 40
 кольри - GREY, WHITE, BLUE'''
-setting = SettingsMenu(20,20,100,40,GRAY,WHITE,BLUE)
+
 # 11. Головний цикл гри:
 run = True
 while run:
@@ -29,13 +32,22 @@ while run:
    for event in pygame.event.get():
       '''виклич метод оновлення меню - передай подію event'''
       setting.update(event)
+      if len (keys_rect) != setting.num_keys:
+         keys_rect = create_keys(setting.num_keys)
+        
       if event.type == pygame.QUIT:
          run = False
 #  - обробка подій (натискання та відпускання клавіш)
       if event.type == pygame.KEYDOWN and setting.game_part=="game":
          key_name = pygame.key.name(event.key)
-         keys_sounds [key_name].play()
-         keys_pressed.add(key_name)
+         if key_name in keys_rect:
+            sounds_img[key]['draw'] = True
+            keys_sounds[key_name].set_volume(setting.volume)
+            if setting.rand:
+               rand_sounds[key_name].play()
+            else:
+               keys_sounds [key_name].play()
+            keys_pressed.add(key_name)
       if event.type == pygame.KEYUP:
          key_name = pygame.key.name(event.key)
          keys_pressed.discard(key_name)  
@@ -44,7 +56,12 @@ while run:
          pos = event.pos
          for key, rect in keys_rect.items():
             if rect.collidepoint(pos) and not key in keys_pressed:
-               keys_sounds[key].play()
+               sounds_img[key]['draw'] = True
+               keys_sounds[key].set_volume(setting.volume)
+               if setting.rand:
+                  rand_sounds[key].play()
+               else:
+                  keys_sounds[key].play()
                keys_pressed.add(key)
       if event.type == pygame.MOUSEBUTTONUP:
          pos = event.pos
@@ -53,7 +70,7 @@ while run:
                keys_pressed.discard(key)
     
 #  - відобразити фон, клавіши, оновити вікно
-   window.fill(WHITE)
+   window.fill(FON)
    '''виклич метод малювати меню'''
    setting.darw(window)
    '''перепиши список клавіш :
@@ -62,6 +79,7 @@ while run:
    '''додай умову - малювати якщо стангри=гра(перевір значення властивості меню)'''
    if setting.game_part == "game":
       draw_keys(window,keys_rect,keys_pressed)
+      draw_effect_sound(window, sounds_img)
    pygame.display.flip()
     # обробка лкіку по клавішам
 
