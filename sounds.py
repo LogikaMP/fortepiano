@@ -1,6 +1,7 @@
 '''Звуки – завантаження та відтворення аудіо'''
 from pygame.mixer import Sound
 from settings import KEYS
+from random import choice
 
 def load_sounds():
     sounds = {}
@@ -9,6 +10,7 @@ def load_sounds():
         sound = Sound(path_file + file)
         sounds[key] = sound
     return sounds
+
 
 # 5. Створити функцію що завантажує звуки:
 

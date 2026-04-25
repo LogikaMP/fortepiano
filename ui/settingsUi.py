@@ -4,7 +4,7 @@
 # імпортуй список клавіш
 from buttons import Button
 from ui.slider import Slider
-from settings import KEYS,BLACK
+from settings import KEYS,BLACK, GRAY, BLUE
 # клас меню налаштувань. Аргументи:
 # координати для кнокпи налаштування та розміри
 # кольри: кнопки, тексту, слайдера
@@ -67,7 +67,6 @@ class SettingsMenu:
         self.slider_num_keys = Slider(x2,y+h//3,w*3,h//2,max_num=7,col=col_slider,col_pointer=col_btn)
         self.num_keys = 0
         # створи змінну для збереження кількості клавіш = 0
-  
         # задай початковий стан (гра)= властивість game_part = "game"
         self.game_part = "game"
 
@@ -98,6 +97,7 @@ class SettingsMenu:
 
             # намалюй повзунок кількості клавіш
             self.slider_num_keys.draw(window)
+  
 
            
     #метод оновлення меню
