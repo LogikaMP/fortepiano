@@ -39,11 +39,12 @@ class Button(Sprite):  # Створюємо клас кнопки, який на
           self.color_text = color_text
           # Зберігаємо колір тексту кнопки
           self.command = command
+          self.text = text
           # Зберігаємо функцію, яка виконається при натисканні кнопки
           if image:
                self.image = pygame.image.load(image)
                self.image = pygame.transform.scale(self.image,(w,h))
-          else:
+          elif text:
                self.add_text(text)
                # Викликаємо метод створення тексту на кнопці
           self.was_pressed = False
@@ -78,7 +79,8 @@ class Button(Sprite):  # Створюємо клас кнопки, який на
                super().draw(surface)
                pygame.draw.rect(surface,(0,0,0),self.rect,width=5)
                # Малюємо саму кнопку через метод батьківського класу
-               surface.blit(self.text, (self.text_x, self.text_y))
+               if self.text:
+                    surface.blit(self.text, (self.text_x, self.text_y))
                # Малюємо текст поверх кнопки
           
      def is_clicked(self):  
