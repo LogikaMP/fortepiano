@@ -23,46 +23,47 @@ class SettingsMenu:
         self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu,image="assets/images/buttons/exit_hover.png")
         # змісти координати для розміщення елементів меню - тексти+слайдери, 
         # х = ч + половина висоти, у = у + ширина
- 
+        x = x + h//2
+        y = y + w//2
 
         # створи текстову кнопку (підпис) для гучності: 
         # координати - що розрахували вище, 
         # текст = "Volume", команди = немає
-        
+        self.txt_voluem = Button(x,y, w,h,col_btn,"volume", BLACK )
         # обчисли позицію для повзунка (праворуч від тексту), 
         # х2 = права координата текстової кнокпи + половина висоти
-     
+        x2 = self.txt_voluem.rect.right + h//2
         
         # трохи змісти вниз для кращого вирівнювання : у = у + чверть висоти
-     
+        y = y +h//4
 
         # створи повзунок гучності : 
         # координати - ті що розрахували вище, 
         # ширина = три ширина, 
         # висота = половина висоти
         # (від 0 до 101)
-        
+        self.slider_volume = Slider(x2,y, w*3, h//2,100, col_slider, col_btn)
         # створи змінну для збереження гучності = 0
-        
+        self.volume = 0
 
         # змісти вниз для наступного блоку= у + дві вистоти
-       
+        y = + h*2
  
         # створи текст для кількості клавіш: 
         # координати - що розрахували вище, 
         # текст = "Num keys", команди = немає
-        
- 
+        self.txt_keys = Button(x,y, w,h,col_btn,"num keys",BLACK)
+
         # трохи змісти вниз : у = у + чверть висоти
-  
+        y = y + h//4
         # створи повзунок кількості клавіш
         # координати - ті що розрахували вище(х2, у), 
         # ширина = три ширина, 
         # висота = половина висоти
         # (від 0 до кількості клавіш KEYS+1)
-
+        self.slider_keys = Slider(x2,y,w*3, h//2,7,col_slider,col_btn)
         # створи змінну для збереження кількості клавіш = 0
-       
+        self.num_keys = 0
         # задай початковий стан (гра)= властивість game_part = "game"
         self.game_part = "game"
 
@@ -85,10 +86,12 @@ class SettingsMenu:
             # намалюй кнопку назад
             self.btn_close.draw(window)
             # намалюй текст гучності
-           
+            self.txt_keys.draw(window)
+            self.txt_voluem.draw(window)
           
             # намалюй повзунок гучності
-            
+            self.slider_keys.draw(window)
+            self.slider_volume.draw(window)
             # намалюй текст кількості клавіш
            
 
@@ -108,9 +111,11 @@ class SettingsMenu:
             self.btn_close.is_clicked()
             
             # оброби перетягування повзунка гучності
-            
-          
+            self.slider_volume.update(event)
+            self.volume = self.slider_volume.value/100
             # оброби перетягування повзунка клавіш
+            self.slider_keys.update(event)
+            self.num_keys = self.slider_keys.value
            
 
             # 0 - 1 (нормалізація гучності) : значення сладйера гучності  / 100 

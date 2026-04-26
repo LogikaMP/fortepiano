@@ -5,12 +5,13 @@ from settings import GRAY, WINDOW_WIDTH, WINDOW_HEIGHT, WHITE,GRAY,BLUE ,KEYS, F
 from keys import create_keys, draw_keys
 '''Додай імопрт класу меню'''
 from ui.settingsUi import SettingsMenu
+from sounds import load_sounds
 # 7. Ініцилізація та Створити вікно 
 pygame.init()
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 setting = SettingsMenu(20,20,100,40,GRAY,WHITE,BLUE)
 # 8. Створити список ректів - клавіш
-keys_rect = create_keys(setting.num_keys)
+keys_rect = create_keys()
 # 9. Створити порожню множину - натиснуті клавіши
 keys_pressed = set()
 # 10. Створити список звуків - завантажити звуки нот
@@ -28,8 +29,7 @@ while run:
    for event in pygame.event.get():
       '''виклич метод оновлення меню - передай подію event'''
       setting.update(event)
-      if len (keys_rect) != setting.num_keys:
-         keys_rect = create_keys(setting.num_keys)
+      
         
       if event.type == pygame.QUIT:
          run = False
