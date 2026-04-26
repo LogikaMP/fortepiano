@@ -3,6 +3,7 @@
 import pygame
 from settings import GRAY, WINDOW_WIDTH, WINDOW_HEIGHT, WHITE,GRAY,BLUE ,KEYS, FON
 from keys import create_keys, draw_keys
+from sounds import load_sounds
 '''Додай імопрт класу меню'''
 from ui.settingsUi import SettingsMenu
 # 7. Ініцилізація та Створити вікно 

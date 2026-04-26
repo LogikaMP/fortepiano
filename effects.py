@@ -2,16 +2,19 @@
 from pygame import image,transform, draw
 from settings import BLACK, BLUE, GRAY, KEYS
 
-
+key_ap = image.load('assets/images/notes/key_unpressed.png')
+key_down = image.load('assets/images/notes/key_pressed.png')
 
 def draw_effect(screen, rect, pressed):
     if pressed:
-       col = BLUE
+       img = key_down
     else:
+         img = key_ap
         
-        col = GRAY
-    draw.rect(screen, col, rect)
-    draw.rect(screen, BLACK, rect, 2)
+    img = transform.scale(img, (rect.width, rect.height))
+    screen.blit(img, rect )
+
+    
 
 # 4. Створити функцію, що відображає ефекти на клавішах:
 #  - отримати екран, де малювати

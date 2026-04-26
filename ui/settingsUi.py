@@ -22,28 +22,35 @@ class SettingsMenu:
         # команда - закрити меню
         self.btn_close = Button(x,y,w,h,col_btn,"Back",col_txt,command= self.close_menu,image="assets/images/buttons/exit_hover.png")
         # змісти координати для розміщення елементів меню - тексти+слайдери, 
-        # х = ч + половина висоти, у = у + ширина
+        # х = ч + половина висоти, у = у + ширина w
  
+        x = x + h/2
+        y = y + w
 
         # створи текстову кнопку (підпис) для гучності: 
         # координати - що розрахували вище, 
         # текст = "Volume", команди = немає
-        
+        self.txt_volume = Button(x,y,w,h,col_btn,"Volome",BLACK)
         # обчисли позицію для повзунка (праворуч від тексту), 
         # х2 = права координата текстової кнокпи + половина висоти
-     
+        x2 = self.txt_volume.rect.right + h//2
         
         # трохи змісти вниз для кращого вирівнювання : у = у + чверть висоти
-     
+        y = y + h/4
+        self.slider_volume = Slider(x2,y,w*3,h//2,100,col_slider,col_btn)
+        self.volume = 0
 
         # створи повзунок гучності : 
         # координати - ті що розрахували вище, 
         # ширина = три ширина, 
         # висота = половина висоти
         # (від 0 до 101)
-        
+        y = y + h*2
+        self.txt_keys = Button(x,y,w,h,col_btn,"Num keys",BLACK)
         # створи змінну для збереження гучності = 0
-        
+        y = y + h//4
+        self.slider_keys = Slider(x2,y,w*3,h//2,7,col_slider,col_btn)
+        self.num_keys = 0
 
         # змісти вниз для наступного блоку= у + дві вистоти
        
@@ -85,14 +92,13 @@ class SettingsMenu:
             # намалюй кнопку назад
             self.btn_close.draw(window)
             # намалюй текст гучності
-           
-          
+            self.txt_volume.draw(window)
             # намалюй повзунок гучності
-            
+            self.slider_volume.draw(window)
             # намалюй текст кількості клавіш
-           
-
-            # намалюй повзунок кількості клавіш
+            self.txt_keys.draw(window)
+            # намалюй повзунок кількості клаві
+            self.slider_keys.draw(window)
            
            
     #метод оновлення меню
@@ -108,12 +114,13 @@ class SettingsMenu:
             self.btn_close.is_clicked()
             
             # оброби перетягування повзунка гучності
-            
-          
+            self.slider_volume.update(event)
+            self.volume = self.slider_volume.value / 100
             # оброби перетягування повзунка клавіш
-           
+            self.slider_keys.update(event)       
 
             # 0 - 1 (нормалізація гучності) : значення сладйера гучності  / 100 
-            #  
+            self.num_keys = int(self.slider_keys.value)
 
             # збережи вибрану кількість клавіш
+            
